@@ -109,46 +109,21 @@ class Filme extends Media {
     }
 }
 
+class Musica extends Media {
+    private $artista;
 
-// --- Exemplo de Utilização ---
+    public function __construct($titulo, $artista) {
+        parent::__construct($titulo);
+        $this->artista = $artista;
+    }
 
-echo "--- Criando Mídias ---
-";
-$livro1 = new Livro("O Senhor dos Anéis", "J.R.R. Tolkien");
-$filme1 = new Filme("O Poderoso Chefão", "Francis Ford Coppola");
+    public function getArtista() {
+        return $this->artista;
+    }
 
-/*
- * CONCEITO: Polimorfismo na prática
- * Chamamos o mesmo método `getDetalhes()` em objetos de tipos diferentes,
- * e cada um responde de acordo com sua própria implementação.
- */
-echo $livro1->getDetalhes() . " - Status: " . $livro1->getStatus() . "
-";
-echo $filme1->getDetalhes() . " - Status: " . $filme1->getStatus() . "
-";
-
-echo "
---- Emprestando Mídia ---
-";
-$livro1->emprestar();
-echo $livro1->getDetalhes() . " - Status: " . $livro1->getStatus() . "
-";
-
-echo "
---- Devolvendo Mídia ---
-";
-$livro1->devolver();
-echo $livro1->getDetalhes() . " - Status: " . $livro1->getStatus() . "
-";
-
-/*
- * CONCEITO: Acessando membro estático
- * Chamamos o método diretamente na classe `Media`, sem precisar de um objeto.
- */
-echo "
------------------------------------
-";
-echo "Total de mídias no catálogo: " . Media::getContadorDeMedia() . "
-";
-
+    // Implementação obrigatória do método abstrato
+    public function getDetalhes() {
+        return "Música: '{$this->getTitulo()}' por {$this->artista}";
+    }
+}
 ?>
